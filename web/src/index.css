@@ -1,0 +1,6 @@
+@import "tailwindcss";
+
+dialog::backdrop {
+  background-color: rgba(2, 6, 23, 0.72);
+  backdrop-filter: blur(4px);
+}

@@ -1,0 +1,22 @@
+# Binaries
+/tikportal
+*.exe
+*.out
+
+# Database files
+*.db
+*.db-shm
+*.db-wal
+data/
+plans/
+
+# Frontend dependencies & build
+web/node_modules/
+web/dist/*
+!web/dist/.keep
+*.tsbuildinfo
+
+# Local env & private RouterOS exports
+.env
+plans/
+.DS_Store

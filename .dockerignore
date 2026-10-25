@@ -1,0 +1,11 @@
+.git
+.github
+.env
+plans/
+data/
+*.db
+*.db-shm
+*.db-wal
+tikportal
+web/node_modules
+web/dist
