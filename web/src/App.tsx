@@ -403,13 +403,15 @@ export function App() {
       <div className="flex min-h-screen flex-col justify-center bg-slate-950 px-4 py-12">
         <div className="mx-auto w-full max-w-md rounded-2xl border border-slate-800 bg-slate-900/90 p-8 shadow-2xl">
           <div className="flex items-center gap-3">
-            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-cyan-500/10 text-cyan-400 ring-1 ring-cyan-500/30">
-              <Router className="h-6 w-6" />
-            </div>
+            <img
+              src="/logo.svg"
+              alt="TikPortal Logo"
+              className="h-11 w-11 rounded-xl shadow-md"
+            />
             <div>
               <h1 className="text-xl font-bold tracking-tight text-white">TikPortal</h1>
               <p className="text-xs text-slate-400">
-                MikroTik RB5009 WireGuard Self-Service Portal
+                MikroTik RouterOS WireGuard Self-Service Portal
               </p>
             </div>
           </div>
@@ -510,9 +512,11 @@ export function App() {
       <header className="border-b border-slate-800/80 bg-slate-900/60 backdrop-blur">
         <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 px-6 py-4">
           <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-500/10 text-cyan-400 ring-1 ring-cyan-500/30">
-              <Router className="h-5 w-5" />
-            </div>
+            <img
+              src="/logo.svg"
+              alt="TikPortal Logo"
+              className="h-10 w-10 rounded-xl shadow-md"
+            />
             <div>
               <div className="flex items-center gap-2.5">
                 <span className="text-lg font-bold tracking-tight text-white">TikPortal</span>

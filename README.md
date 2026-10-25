@@ -1,6 +1,12 @@
-# TikPortal
+<p align="center">
+  <img src="web/public/logo.svg" width="88" height="88" alt="TikPortal Logo" />
+</p>
 
-Self-hosted, single-binary **WireGuard VPN Self-Service Portal** for **MikroTik RouterOS v7**, built with **Go**, **React (TypeScript + TailwindCSS)**, **SQLite**, and **OIDC** (Zitadel, Keycloak, Authentik, etc.).
+<h1 align="center">TikPortal</h1>
+
+<p align="center">
+  Self-hosted, single-binary <strong>WireGuard VPN Self-Service Portal</strong> for <strong>MikroTik RouterOS v7</strong>, built with <strong>Go</strong>, <strong>React (TypeScript + TailwindCSS)</strong>, <strong>SQLite</strong>, and <strong>OIDC</strong> (Zitadel, Keycloak, Authentik, etc.).
+</p>
 
 ---
 
