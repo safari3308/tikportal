@@ -1,0 +1,594 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2026-10-26 20:38+0700\n"
+"Mime-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: zh\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
+
+#. js-lingui-explicit-id
+#: src/components/dashboard/UserDashboard.tsx:46
+msgid "Global Connection Quota"
+msgstr "全局连接配额"
+
+#. js-lingui-explicit-id
+#: src/components/dashboard/UserDashboard.tsx:49
+msgid "{used} / {limit} Peers Used"
+msgstr "已用 {used} / {limit} 个节点"
+
+#. js-lingui-explicit-id
+#: src/components/dashboard/UserDashboard.tsx:56
+msgid "Your limit applies across all WireGuard networks. Removing any connection immediately frees its IP and quota slot."
+msgstr "配额适用于所有 WireGuard 网络。删除连接会立即释放其 IP 地址与配额。"
+
+#. js-lingui-explicit-id
+#: src/components/dashboard/UserDashboard.tsx:69
+msgid "Refresh Stats"
+msgstr "刷新状态"
+
+#. js-lingui-explicit-id
+#: src/components/dashboard/UserDashboard.tsx:78
+msgid "New VPN Connection"
+msgstr "新建 VPN 连接"
+
+#. js-lingui-explicit-id
+#: src/components/dashboard/UserDashboard.tsx:86
+msgid "Available WireGuard Networks"
+msgstr "可用 WireGuard 网络"
+
+#. js-lingui-explicit-id
+#: src/components/admin/AdminDashboard.tsx:182
+#: src/components/dashboard/UserDashboard.tsx:106
+msgid "Subnet"
+msgstr "子网"
+
+#. js-lingui-explicit-id
+#: src/components/admin/AdminDashboard.tsx:190
+#: src/components/dashboard/UserDashboard.tsx:109
+msgid "Endpoint"
+msgstr "端点"
+
+#. js-lingui-explicit-id
+#: src/components/dashboard/UserDashboard.tsx:112
+msgid "IPs Used"
+msgstr "已分配 IP"
+
+#. js-lingui-explicit-id
+#: src/components/dashboard/UserDashboard.tsx:125
+msgid "Connect to {name}"
+msgstr "连接到 {name}"
+
+#. js-lingui-explicit-id
+#: src/components/dashboard/UserDashboard.tsx:136
+msgid "My Provisioned Connections ({count})"
+msgstr "我的 VPN 连接 ({count})"
+
+#. js-lingui-explicit-id
+#: src/components/dashboard/UserDashboard.tsx:143
+msgid "No WireGuard connections created yet"
+msgstr "尚未创建 WireGuard 连接"
+
+#. js-lingui-explicit-id
+#: src/components/dashboard/UserDashboard.tsx:146
+msgid "Click \"New VPN Connection\" above to get a scannable QR code or configuration file."
+msgstr "点击上方的“新建 VPN 连接”以获取二维码或配置文件。"
+
+#. js-lingui-explicit-id
+#: src/components/dashboard/UserDashboard.tsx:172
+msgid "Handshake {time}"
+msgstr "握手 {time}"
+
+#. js-lingui-explicit-id
+#: src/components/dashboard/UserDashboard.tsx:173
+msgid "Idle"
+msgstr "空闲"
+
+#. js-lingui-explicit-id
+#: src/components/dashboard/UserDashboard.tsx:188
+msgid "Public Key:"
+msgstr "公钥 (Public Key):"
+
+#. js-lingui-explicit-id
+#: src/components/dashboard/UserDashboard.tsx:194
+msgid "Key Mode:"
+msgstr "密钥模式:"
+
+#. js-lingui-explicit-id
+#: src/components/dashboard/UserDashboard.tsx:197
+msgid "Mode 2 — User Public Key (.conf only)"
+msgstr "模式 2 — 自定义公钥 (仅 .conf)"
+
+#. js-lingui-explicit-id
+#: src/components/dashboard/UserDashboard.tsx:198
+msgid "Mode 1 — Server Generated (QR + .conf)"
+msgstr "模式 1 — 服务器生成 (二维码 + .conf)"
+
+#. js-lingui-explicit-id
+#: src/components/dashboard/UserDashboard.tsx:202
+msgid "Traffic (Rx / Tx):"
+msgstr "流量 (接收 / 发送):"
+
+#. js-lingui-explicit-id
+#: src/components/dashboard/UserDashboard.tsx:218
+msgid "Regenerate Keys / QR"
+msgstr "重置密钥 / 二维码"
+
+#. js-lingui-explicit-id
+#: src/components/dashboard/UserDashboard.tsx:227
+msgid "Template .conf"
+msgstr "模板 .conf"
+
+#. js-lingui-explicit-id
+#: src/components/admin/AdminDashboard.tsx:216
+#: src/components/dashboard/UserDashboard.tsx:237
+msgid "Delete"
+msgstr "删除"
+
+#. js-lingui-explicit-id
+#: src/components/modals/ProvisionResultModal.tsx:22
+msgid "WireGuard Configuration — {name}"
+msgstr "WireGuard 配置 — {name}"
+
+#. js-lingui-explicit-id
+#: src/components/modals/ProvisionResultModal.tsx:25
+msgid "Assigned IP: {ip}/32 on {network}"
+msgstr "分配 IP: {ip}/32 ({network})"
+
+#. js-lingui-explicit-id
+#: src/components/modals/ProvisionResultModal.tsx:39
+msgid "Scan this QR code with the WireGuard mobile app or download the .conf file now. For security, the private key is never stored on the server."
+msgstr "请立即使用 WireGuard 手机应用扫描此二维码或下载 .conf 文件。出于安全考虑，服务器不保存私钥。"
+
+#. js-lingui-explicit-id
+#: src/components/modals/ProvisionResultModal.tsx:46
+msgid "Custom Public Key Mode: Download the .conf file below and replace <INSERT_YOUR_PRIVATE_KEY> with your private key before importing into WireGuard."
+msgstr "自定义公钥模式：请下载下方 .conf 文件并将 <INSERT_YOUR_PRIVATE_KEY> 替换为您的私钥。"
+
+#. js-lingui-explicit-id
+#: src/components/modals/ProvisionResultModal.tsx:55
+msgid "Configuration File (.conf)"
+msgstr "配置文件 (.conf)"
+
+#. js-lingui-explicit-id
+#: src/components/modals/ProvisionResultModal.tsx:70
+msgid "Copied"
+msgstr "已复制"
+
+#. js-lingui-explicit-id
+#: src/components/modals/ProvisionResultModal.tsx:75
+msgid "Copy"
+msgstr "复制"
+
+#. js-lingui-explicit-id
+#: src/components/modals/ProvisionResultModal.tsx:93
+msgid "Download .conf"
+msgstr "下载 .conf"
+
+#. js-lingui-explicit-id
+#: src/App.tsx:66
+msgid "Loading TikPortal..."
+msgstr "正在加载 TikPortal..."
+
+#. js-lingui-explicit-id
+#: src/App.tsx:125
+#: src/App.tsx:138
+msgid "Dismiss"
+msgstr "关闭"
+
+#. js-lingui-explicit-id
+#: src/components/modals/RegenerateKeyModal.tsx:34
+msgid "Regenerate Keys — {name}"
+msgstr "重新生成密钥 — {name}"
+
+#. js-lingui-explicit-id
+#: src/components/modals/RegenerateKeyModal.tsx:35
+msgid "Updates the peer on RouterOS in-place while keeping IP {ip}."
+msgstr "在 RouterOS 上就地更新密钥并保留 IP {ip}。"
+
+#. js-lingui-explicit-id
+#: src/components/modals/RegenerateKeyModal.tsx:52
+msgid "Generate New Keypair + QR"
+msgstr "生成新密钥对 + 二维码"
+
+#. js-lingui-explicit-id
+#: src/components/modals/RegenerateKeyModal.tsx:55
+msgid "Rotates keys on RouterOS and displays a fresh QR code for mobile scanning."
+msgstr "在 RouterOS 上轮换密钥并显示新的手机二维码。"
+
+#. js-lingui-explicit-id
+#: src/components/modals/RegenerateKeyModal.tsx:72
+msgid "Set Custom Public Key"
+msgstr "设置自定义公钥"
+
+#. js-lingui-explicit-id
+#: src/components/modals/RegenerateKeyModal.tsx:75
+msgid "Replaces public key on RouterOS and returns a .conf file without QR code."
+msgstr "替换公钥并返回不含二维码的 .conf 文件。"
+
+#. js-lingui-explicit-id
+#: src/components/modals/RegenerateKeyModal.tsx:85
+msgid "New WireGuard Public Key"
+msgstr "新的 WireGuard 公钥"
+
+#. js-lingui-explicit-id
+#: src/components/modals/CreatePeerModal.tsx:150
+#: src/components/modals/NetworkFormModal.tsx:212
+#: src/components/modals/RegenerateKeyModal.tsx:104
+msgid "Cancel"
+msgstr "取消"
+
+#. js-lingui-explicit-id
+#: src/components/modals/RegenerateKeyModal.tsx:111
+msgid "Updating RouterOS..."
+msgstr "正在更新 RouterOS..."
+
+#. js-lingui-explicit-id
+#: src/components/modals/RegenerateKeyModal.tsx:111
+msgid "Rotate Keys Now"
+msgstr "立即轮换密钥"
+
+#. js-lingui-explicit-id
+#: src/components/auth/LoginView.tsx:50
+#: src/components/layout/Header.tsx:54
+msgid "MikroTik RouterOS WireGuard Self-Service Portal"
+msgstr "MikroTik RouterOS WireGuard 自助服务门户"
+
+#. js-lingui-explicit-id
+#: src/components/auth/LoginView.tsx:68
+msgid "Sign in with SSO (OIDC)"
+msgstr "使用 SSO (OIDC) 登录"
+
+#. js-lingui-explicit-id
+#: src/components/auth/LoginView.tsx:79
+msgid "or Dev Login"
+msgstr "或本地开发登录"
+
+#. js-lingui-explicit-id
+#: src/components/auth/LoginView.tsx:87
+msgid "Email Address"
+msgstr "电子邮箱"
+
+#. js-lingui-explicit-id
+#: src/components/auth/LoginView.tsx:101
+msgid "Display Name"
+msgstr "显示名称"
+
+#. js-lingui-explicit-id
+#: src/components/auth/LoginView.tsx:122
+msgid "Preset: Admin"
+msgstr "预设：管理员"
+
+#. js-lingui-explicit-id
+#: src/components/auth/LoginView.tsx:132
+msgid "Preset: Standard User"
+msgstr "预设：普通用户"
+
+#. js-lingui-explicit-id
+#: src/components/auth/LoginView.tsx:140
+msgid "Continue to TikPortal"
+msgstr "进入 TikPortal"
+
+#. js-lingui-explicit-id
+#: src/components/auth/LoginView.tsx:155
+#: src/components/layout/Footer.tsx:25
+msgid "GitHub Repository"
+msgstr "GitHub 仓库"
+
+#. js-lingui-explicit-id
+#: src/components/layout/Footer.tsx:15
+msgid "Open-source WireGuard VPN Manager for MikroTik RouterOS"
+msgstr "面向 MikroTik RouterOS 的开源 WireGuard VPN 管理工具"
+
+#. js-lingui-explicit-id
+#: src/components/modals/CreatePeerModal.tsx:44
+msgid "Create WireGuard VPN Connection"
+msgstr "创建 WireGuard VPN 连接"
+
+#. js-lingui-explicit-id
+#: src/components/modals/CreatePeerModal.tsx:45
+msgid "Automatically allocates the lowest available IP in the selected network."
+msgstr "自动分配所选子网中最小可用 IP 地址。"
+
+#. js-lingui-explicit-id
+#: src/components/modals/CreatePeerModal.tsx:52
+msgid "Select WireGuard Network"
+msgstr "选择 WireGuard 网络"
+
+#. js-lingui-explicit-id
+#: src/components/modals/CreatePeerModal.tsx:69
+msgid "Device / Connection Name"
+msgstr "设备 / 连接名称"
+
+#. js-lingui-explicit-id
+#: src/components/modals/CreatePeerModal.tsx:76
+msgid "e.g. MacBook Pro, iPhone 16, Home Router"
+msgstr "例如：MacBook Pro, iPhone 16"
+
+#. js-lingui-explicit-id
+#: src/components/modals/CreatePeerModal.tsx:83
+msgid "Key Provisioning Mode"
+msgstr "密钥生成方式"
+
+#. js-lingui-explicit-id
+#: src/components/modals/CreatePeerModal.tsx:97
+msgid "Server Generates Keys"
+msgstr "服务器生成密钥"
+
+#. js-lingui-explicit-id
+#: src/components/modals/CreatePeerModal.tsx:100
+msgid "Generates keypair for you. Shows scannable mobile QR code + .conf file once."
+msgstr "为您生成密钥对，一次性显示手机可扫描的二维码和 .conf 文件。"
+
+#. js-lingui-explicit-id
+#: src/components/modals/CreatePeerModal.tsx:117
+msgid "Bring Your Own Public Key"
+msgstr "自带公钥"
+
+#. js-lingui-explicit-id
+#: src/components/modals/CreatePeerModal.tsx:120
+msgid "Paste your public key. No QR code; provides a .conf file where you fill in PrivateKey."
+msgstr "粘贴您的公钥，不生成二维码，下载 .conf 模板并自行填入私钥。"
+
+#. js-lingui-explicit-id
+#: src/components/modals/CreatePeerModal.tsx:131
+msgid "Your WireGuard Public Key (Base64, 44 chars)"
+msgstr "您的 WireGuard 公钥 (Base64)"
+
+#. js-lingui-explicit-id
+#: src/components/modals/CreatePeerModal.tsx:157
+msgid "Provisioning on RouterOS..."
+msgstr "正在配置 RouterOS..."
+
+#. js-lingui-explicit-id
+#: src/components/modals/CreatePeerModal.tsx:157
+msgid "Create Connection"
+msgstr "创建连接"
+
+#. js-lingui-explicit-id
+#: src/components/modals/NetworkFormModal.tsx:31
+msgid "Edit WireGuard Network"
+msgstr "编辑 WireGuard 网络"
+
+#. js-lingui-explicit-id
+#: src/components/modals/NetworkFormModal.tsx:31
+msgid "Add WireGuard Network"
+msgstr "添加 WireGuard 网络"
+
+#. js-lingui-explicit-id
+#: src/components/modals/NetworkFormModal.tsx:33
+msgid "Map a TikPortal network profile to an existing WireGuard interface on RouterOS."
+msgstr "将 TikPortal 网络绑定到 RouterOS 上的现有 WireGuard 接口。"
+
+#. js-lingui-explicit-id
+#: src/components/modals/NetworkFormModal.tsx:42
+msgid "Network Display Name"
+msgstr "网络显示名称"
+
+#. js-lingui-explicit-id
+#: src/components/modals/NetworkFormModal.tsx:55
+msgid "RouterOS WireGuard Interface"
+msgstr "RouterOS WireGuard 接口名称"
+
+#. js-lingui-explicit-id
+#: src/components/modals/NetworkFormModal.tsx:69
+msgid "Description"
+msgstr "描述"
+
+#. js-lingui-explicit-id
+#: src/components/modals/NetworkFormModal.tsx:81
+msgid "RouterOS Interface Public Key"
+msgstr "RouterOS 接口公钥"
+
+#. js-lingui-explicit-id
+#: src/components/modals/NetworkFormModal.tsx:96
+msgid "Subnet CIDR"
+msgstr "子网 CIDR"
+
+#. js-lingui-explicit-id
+#: src/components/modals/NetworkFormModal.tsx:108
+msgid "Router Gateway IP"
+msgstr "网关 IP"
+
+#. js-lingui-explicit-id
+#: src/components/modals/NetworkFormModal.tsx:124
+msgid "Public Endpoint Host"
+msgstr "公网 Endpoint 主机"
+
+#. js-lingui-explicit-id
+#: src/components/modals/NetworkFormModal.tsx:137
+msgid "Public UDP Port"
+msgstr "公网 UDP 端口"
+
+#. js-lingui-explicit-id
+#: src/components/modals/NetworkFormModal.tsx:157
+msgid "Client DNS Servers"
+msgstr "客户端 DNS"
+
+#. js-lingui-explicit-id
+#: src/components/modals/NetworkFormModal.tsx:168
+msgid "Client Allowed IPs"
+msgstr "客户端 Allowed IPs"
+
+#. js-lingui-explicit-id
+#: src/components/modals/NetworkFormModal.tsx:179
+msgid "Keepalive (sec)"
+msgstr "Keepalive (秒)"
+
+#. js-lingui-explicit-id
+#: src/components/modals/NetworkFormModal.tsx:203
+msgid "Enable this network for user self-service"
+msgstr "启用此网络供用户自助创建连接"
+
+#. js-lingui-explicit-id
+#: src/components/modals/NetworkFormModal.tsx:218
+msgid "Save Network"
+msgstr "保存网络"
+
+#. js-lingui-explicit-id
+#: src/components/layout/Header.tsx:49
+msgid "RouterOS Mock Mode"
+msgstr "RouterOS 模拟模式"
+
+#. js-lingui-explicit-id
+#: src/components/layout/Header.tsx:50
+msgid "RouterOS REST Connected"
+msgstr "RouterOS REST 已连接"
+
+#. js-lingui-explicit-id
+#: src/components/layout/Header.tsx:74
+msgid "My VPNs"
+msgstr "我的 VPN"
+
+#. js-lingui-explicit-id
+#: src/components/layout/Header.tsx:86
+msgid "Admin Console"
+msgstr "管理控制台"
+
+#. js-lingui-explicit-id
+#: src/components/layout/Header.tsx:103
+#: src/components/layout/Header.tsx:106
+msgid "Sign Out"
+msgstr "退出登录"
+
+#. js-lingui-explicit-id
+#: src/components/admin/AdminDashboard.tsx:58
+msgid "WireGuard Networks ({count})"
+msgstr "WireGuard 网络 ({count})"
+
+#. js-lingui-explicit-id
+#: src/components/admin/AdminDashboard.tsx:70
+msgid "Users & Quotas ({count})"
+msgstr "用户与配额 ({count})"
+
+#. js-lingui-explicit-id
+#: src/components/admin/AdminDashboard.tsx:82
+msgid "All Provisioned Peers ({count})"
+msgstr "所有节点 ({count})"
+
+#. js-lingui-explicit-id
+#: src/components/admin/AdminDashboard.tsx:95
+msgid "Discovered RouterOS WireGuard Interfaces (via REST API)"
+msgstr "已发现的 RouterOS WireGuard 接口"
+
+#. js-lingui-explicit-id
+#: src/components/admin/AdminDashboard.tsx:104
+msgid "Only RouterOS WireGuard interfaces matching your comment tag filter appear here."
+msgstr "仅显示备注包含过滤标签的 RouterOS WireGuard 接口。"
+
+#. js-lingui-explicit-id
+#: src/components/admin/AdminDashboard.tsx:115
+msgid "Add Network"
+msgstr "添加网络"
+
+#. js-lingui-explicit-id
+#: src/components/admin/AdminDashboard.tsx:138
+msgid "Configured"
+msgstr "已配置"
+
+#. js-lingui-explicit-id
+#: src/components/admin/AdminDashboard.tsx:146
+msgid "Import Interface"
+msgstr "导入接口"
+
+#. js-lingui-explicit-id
+#: src/components/admin/AdminDashboard.tsx:170
+msgid "ENABLED"
+msgstr "已启用"
+
+#. js-lingui-explicit-id
+#: src/components/admin/AdminDashboard.tsx:170
+msgid "DISABLED"
+msgstr "已禁用"
+
+#. js-lingui-explicit-id
+#: src/components/admin/AdminDashboard.tsx:186
+msgid "Gateway IP:"
+msgstr "网关 IP:"
+
+#. js-lingui-explicit-id
+#: src/components/admin/AdminDashboard.tsx:196
+msgid "Allocated IPs:"
+msgstr "已用 IP:"
+
+#. js-lingui-explicit-id
+#: src/components/admin/AdminDashboard.tsx:209
+msgid "Edit Network"
+msgstr "编辑网络"
+
+#. js-lingui-explicit-id
+#: src/components/admin/AdminDashboard.tsx:233
+msgid "Global Default Max Peers per User"
+msgstr "每用户默认最大节点数"
+
+#. js-lingui-explicit-id
+#: src/components/admin/AdminDashboard.tsx:236
+msgid "Applies to all users unless overridden individually below (total across all networks)."
+msgstr "适用于所有未单独设置配额的用户（跨所有网络总计）。"
+
+#. js-lingui-explicit-id
+#: src/components/admin/AdminDashboard.tsx:254
+msgid "Save Default Limit"
+msgstr "保存默认限制"
+
+#. js-lingui-explicit-id
+#: src/components/admin/AdminDashboard.tsx:263
+#: src/components/admin/AdminDashboard.tsx:321
+msgid "User"
+msgstr "用户"
+
+#. js-lingui-explicit-id
+#: src/components/admin/AdminDashboard.tsx:264
+msgid "Role"
+msgstr "角色"
+
+#. js-lingui-explicit-id
+#: src/components/admin/AdminDashboard.tsx:265
+msgid "Active Peers"
+msgstr "活动节点"
+
+#. js-lingui-explicit-id
+#: src/components/admin/AdminDashboard.tsx:266
+msgid "Custom Limit Override"
+msgstr "自定义配额"
+
+#. js-lingui-explicit-id
+#: src/components/admin/AdminDashboard.tsx:267
+msgid "Effective Limit"
+msgstr "生效配额"
+
+#. js-lingui-explicit-id
+#: src/components/admin/AdminDashboard.tsx:320
+msgid "Device Name"
+msgstr "设备名称"
+
+#. js-lingui-explicit-id
+#: src/components/admin/AdminDashboard.tsx:322
+msgid "Network (ROS Interface)"
+msgstr "网络 (ROS 接口)"
+
+#. js-lingui-explicit-id
+#: src/components/admin/AdminDashboard.tsx:323
+msgid "Allocated IP"
+msgstr "分配 IP"
+
+#. js-lingui-explicit-id
+#: src/components/admin/AdminDashboard.tsx:324
+msgid "Handshake / Traffic"
+msgstr "握手 / 流量"
+
+#. js-lingui-explicit-id
+#: src/components/admin/AdminDashboard.tsx:325
+msgid "Actions"
+msgstr "操作"
+
+#. js-lingui-explicit-id
+#: src/components/admin/AdminDashboard.tsx:348
+msgid "Revoke"
+msgstr "撤销"

@@ -1,0 +1,594 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2026-10-26 20:38+0700\n"
+"Mime-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: vi\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
+
+#. js-lingui-explicit-id
+#: src/components/dashboard/UserDashboard.tsx:46
+msgid "Global Connection Quota"
+msgstr "Hạn mức kết nối VPN"
+
+#. js-lingui-explicit-id
+#: src/components/dashboard/UserDashboard.tsx:49
+msgid "{used} / {limit} Peers Used"
+msgstr "Đã dùng {used} / {limit} kết nối"
+
+#. js-lingui-explicit-id
+#: src/components/dashboard/UserDashboard.tsx:56
+msgid "Your limit applies across all WireGuard networks. Removing any connection immediately frees its IP and quota slot."
+msgstr "Hạn mức áp dụng chung trên tất cả mạng WireGuard. Khi xoá một kết nối, địa chỉ IP và hạn mức sẽ được giải phóng ngay lập tức."
+
+#. js-lingui-explicit-id
+#: src/components/dashboard/UserDashboard.tsx:69
+msgid "Refresh Stats"
+msgstr "Làm mới"
+
+#. js-lingui-explicit-id
+#: src/components/dashboard/UserDashboard.tsx:78
+msgid "New VPN Connection"
+msgstr "Tạo kết nối VPN mới"
+
+#. js-lingui-explicit-id
+#: src/components/dashboard/UserDashboard.tsx:86
+msgid "Available WireGuard Networks"
+msgstr "Danh sách mạng WireGuard khả dụng"
+
+#. js-lingui-explicit-id
+#: src/components/admin/AdminDashboard.tsx:182
+#: src/components/dashboard/UserDashboard.tsx:106
+msgid "Subnet"
+msgstr "Dải mạng"
+
+#. js-lingui-explicit-id
+#: src/components/admin/AdminDashboard.tsx:190
+#: src/components/dashboard/UserDashboard.tsx:109
+msgid "Endpoint"
+msgstr "Máy chủ"
+
+#. js-lingui-explicit-id
+#: src/components/dashboard/UserDashboard.tsx:112
+msgid "IPs Used"
+msgstr "IP đã cấp"
+
+#. js-lingui-explicit-id
+#: src/components/dashboard/UserDashboard.tsx:125
+msgid "Connect to {name}"
+msgstr "Kết nối vào {name}"
+
+#. js-lingui-explicit-id
+#: src/components/dashboard/UserDashboard.tsx:136
+msgid "My Provisioned Connections ({count})"
+msgstr "Các kết nối VPN của tôi ({count})"
+
+#. js-lingui-explicit-id
+#: src/components/dashboard/UserDashboard.tsx:143
+msgid "No WireGuard connections created yet"
+msgstr "Chưa có kết nối WireGuard nào"
+
+#. js-lingui-explicit-id
+#: src/components/dashboard/UserDashboard.tsx:146
+msgid "Click \"New VPN Connection\" above to get a scannable QR code or configuration file."
+msgstr "Nhấn \"Tạo kết nối VPN mới\" ở trên để nhận mã QR hoặc tải tệp cấu hình .conf."
+
+#. js-lingui-explicit-id
+#: src/components/dashboard/UserDashboard.tsx:172
+msgid "Handshake {time}"
+msgstr "Handshake {time}"
+
+#. js-lingui-explicit-id
+#: src/components/dashboard/UserDashboard.tsx:173
+msgid "Idle"
+msgstr "Chờ kết nối"
+
+#. js-lingui-explicit-id
+#: src/components/dashboard/UserDashboard.tsx:188
+msgid "Public Key:"
+msgstr "Khóa công khai (Public Key):"
+
+#. js-lingui-explicit-id
+#: src/components/dashboard/UserDashboard.tsx:194
+msgid "Key Mode:"
+msgstr "Chế độ khóa:"
+
+#. js-lingui-explicit-id
+#: src/components/dashboard/UserDashboard.tsx:197
+msgid "Mode 2 — User Public Key (.conf only)"
+msgstr "Chế độ 2 — Tự nhập Public Key (chỉ .conf)"
+
+#. js-lingui-explicit-id
+#: src/components/dashboard/UserDashboard.tsx:198
+msgid "Mode 1 — Server Generated (QR + .conf)"
+msgstr "Chế độ 1 — Máy chủ tạo khóa (QR + .conf)"
+
+#. js-lingui-explicit-id
+#: src/components/dashboard/UserDashboard.tsx:202
+msgid "Traffic (Rx / Tx):"
+msgstr "Lưu lượng (Nhận / Gửi):"
+
+#. js-lingui-explicit-id
+#: src/components/dashboard/UserDashboard.tsx:218
+msgid "Regenerate Keys / QR"
+msgstr "Tạo lại khóa / Mã QR"
+
+#. js-lingui-explicit-id
+#: src/components/dashboard/UserDashboard.tsx:227
+msgid "Template .conf"
+msgstr "Tải mẫu .conf"
+
+#. js-lingui-explicit-id
+#: src/components/admin/AdminDashboard.tsx:216
+#: src/components/dashboard/UserDashboard.tsx:237
+msgid "Delete"
+msgstr "Xoá"
+
+#. js-lingui-explicit-id
+#: src/components/modals/ProvisionResultModal.tsx:22
+msgid "WireGuard Configuration — {name}"
+msgstr "Cấu hình WireGuard — {name}"
+
+#. js-lingui-explicit-id
+#: src/components/modals/ProvisionResultModal.tsx:25
+msgid "Assigned IP: {ip}/32 on {network}"
+msgstr "IP được cấp: {ip}/32 trên mạng {network}"
+
+#. js-lingui-explicit-id
+#: src/components/modals/ProvisionResultModal.tsx:39
+msgid "Scan this QR code with the WireGuard mobile app or download the .conf file now. For security, the private key is never stored on the server."
+msgstr "Hãy quét mã QR này bằng ứng dụng WireGuard trên điện thoại hoặc tải tệp .conf ngay bây giờ. Vì lý do bảo mật, Private Key không bao giờ được lưu trên máy chủ."
+
+#. js-lingui-explicit-id
+#: src/components/modals/ProvisionResultModal.tsx:46
+msgid "Custom Public Key Mode: Download the .conf file below and replace <INSERT_YOUR_PRIVATE_KEY> with your private key before importing into WireGuard."
+msgstr "Chế độ tự nhập Public Key: Tải tệp .conf bên dưới và thay thế <INSERT_YOUR_PRIVATE_KEY> bằng khóa bí mật của bạn trước khi nhập vào WireGuard."
+
+#. js-lingui-explicit-id
+#: src/components/modals/ProvisionResultModal.tsx:55
+msgid "Configuration File (.conf)"
+msgstr "Tệp cấu hình (.conf)"
+
+#. js-lingui-explicit-id
+#: src/components/modals/ProvisionResultModal.tsx:70
+msgid "Copied"
+msgstr "Đã sao chép"
+
+#. js-lingui-explicit-id
+#: src/components/modals/ProvisionResultModal.tsx:75
+msgid "Copy"
+msgstr "Sao chép"
+
+#. js-lingui-explicit-id
+#: src/components/modals/ProvisionResultModal.tsx:93
+msgid "Download .conf"
+msgstr "Tải tệp .conf"
+
+#. js-lingui-explicit-id
+#: src/App.tsx:66
+msgid "Loading TikPortal..."
+msgstr "Đang tải TikPortal..."
+
+#. js-lingui-explicit-id
+#: src/App.tsx:125
+#: src/App.tsx:138
+msgid "Dismiss"
+msgstr "Đóng"
+
+#. js-lingui-explicit-id
+#: src/components/modals/RegenerateKeyModal.tsx:34
+msgid "Regenerate Keys — {name}"
+msgstr "Tạo lại khóa — {name}"
+
+#. js-lingui-explicit-id
+#: src/components/modals/RegenerateKeyModal.tsx:35
+msgid "Updates the peer on RouterOS in-place while keeping IP {ip}."
+msgstr "Cập nhật khóa trực tiếp trên RouterOS và giữ nguyên địa chỉ IP {ip}."
+
+#. js-lingui-explicit-id
+#: src/components/modals/RegenerateKeyModal.tsx:52
+msgid "Generate New Keypair + QR"
+msgstr "Tạo cặp khóa mới + Mã QR"
+
+#. js-lingui-explicit-id
+#: src/components/modals/RegenerateKeyModal.tsx:55
+msgid "Rotates keys on RouterOS and displays a fresh QR code for mobile scanning."
+msgstr "Đổi khóa mới trên RouterOS và hiển thị mã QR mới để quét trên điện thoại."
+
+#. js-lingui-explicit-id
+#: src/components/modals/RegenerateKeyModal.tsx:72
+msgid "Set Custom Public Key"
+msgstr "Đặt Public Key tùy chỉnh"
+
+#. js-lingui-explicit-id
+#: src/components/modals/RegenerateKeyModal.tsx:75
+msgid "Replaces public key on RouterOS and returns a .conf file without QR code."
+msgstr "Thay thế Public Key trên RouterOS và trả về tệp .conf không kèm mã QR."
+
+#. js-lingui-explicit-id
+#: src/components/modals/RegenerateKeyModal.tsx:85
+msgid "New WireGuard Public Key"
+msgstr "WireGuard Public Key mới"
+
+#. js-lingui-explicit-id
+#: src/components/modals/CreatePeerModal.tsx:150
+#: src/components/modals/NetworkFormModal.tsx:212
+#: src/components/modals/RegenerateKeyModal.tsx:104
+msgid "Cancel"
+msgstr "Huỷ"
+
+#. js-lingui-explicit-id
+#: src/components/modals/RegenerateKeyModal.tsx:111
+msgid "Updating RouterOS..."
+msgstr "Đang cập nhật RouterOS..."
+
+#. js-lingui-explicit-id
+#: src/components/modals/RegenerateKeyModal.tsx:111
+msgid "Rotate Keys Now"
+msgstr "Đổi khóa ngay"
+
+#. js-lingui-explicit-id
+#: src/components/auth/LoginView.tsx:50
+#: src/components/layout/Header.tsx:54
+msgid "MikroTik RouterOS WireGuard Self-Service Portal"
+msgstr "Cổng tự phục vụ WireGuard VPN cho MikroTik RouterOS"
+
+#. js-lingui-explicit-id
+#: src/components/auth/LoginView.tsx:68
+msgid "Sign in with SSO (OIDC)"
+msgstr "Đăng nhập qua SSO (OIDC)"
+
+#. js-lingui-explicit-id
+#: src/components/auth/LoginView.tsx:79
+msgid "or Dev Login"
+msgstr "hoặc Đăng nhập thử nghiệm"
+
+#. js-lingui-explicit-id
+#: src/components/auth/LoginView.tsx:87
+msgid "Email Address"
+msgstr "Địa chỉ Email"
+
+#. js-lingui-explicit-id
+#: src/components/auth/LoginView.tsx:101
+msgid "Display Name"
+msgstr "Tên hiển thị"
+
+#. js-lingui-explicit-id
+#: src/components/auth/LoginView.tsx:122
+msgid "Preset: Admin"
+msgstr "Mẫu: Quản trị viên"
+
+#. js-lingui-explicit-id
+#: src/components/auth/LoginView.tsx:132
+msgid "Preset: Standard User"
+msgstr "Mẫu: Người dùng"
+
+#. js-lingui-explicit-id
+#: src/components/auth/LoginView.tsx:140
+msgid "Continue to TikPortal"
+msgstr "Tiếp tục vào TikPortal"
+
+#. js-lingui-explicit-id
+#: src/components/auth/LoginView.tsx:155
+#: src/components/layout/Footer.tsx:25
+msgid "GitHub Repository"
+msgstr "Mã nguồn trên GitHub"
+
+#. js-lingui-explicit-id
+#: src/components/layout/Footer.tsx:15
+msgid "Open-source WireGuard VPN Manager for MikroTik RouterOS"
+msgstr "Trình quản lý WireGuard VPN mã nguồn mở cho MikroTik RouterOS"
+
+#. js-lingui-explicit-id
+#: src/components/modals/CreatePeerModal.tsx:44
+msgid "Create WireGuard VPN Connection"
+msgstr "Tạo kết nối WireGuard VPN mới"
+
+#. js-lingui-explicit-id
+#: src/components/modals/CreatePeerModal.tsx:45
+msgid "Automatically allocates the lowest available IP in the selected network."
+msgstr "Tự động cấp phát địa chỉ IP trống thấp nhất trong mạng đã chọn."
+
+#. js-lingui-explicit-id
+#: src/components/modals/CreatePeerModal.tsx:52
+msgid "Select WireGuard Network"
+msgstr "Chọn mạng WireGuard"
+
+#. js-lingui-explicit-id
+#: src/components/modals/CreatePeerModal.tsx:69
+msgid "Device / Connection Name"
+msgstr "Tên thiết bị / Kết nối"
+
+#. js-lingui-explicit-id
+#: src/components/modals/CreatePeerModal.tsx:76
+msgid "e.g. MacBook Pro, iPhone 16, Home Router"
+msgstr "VD: MacBook Pro, iPhone 16, Router ở nhà"
+
+#. js-lingui-explicit-id
+#: src/components/modals/CreatePeerModal.tsx:83
+msgid "Key Provisioning Mode"
+msgstr "Phương thức khởi tạo khóa"
+
+#. js-lingui-explicit-id
+#: src/components/modals/CreatePeerModal.tsx:97
+msgid "Server Generates Keys"
+msgstr "Máy chủ tự tạo cặp khóa"
+
+#. js-lingui-explicit-id
+#: src/components/modals/CreatePeerModal.tsx:100
+msgid "Generates keypair for you. Shows scannable mobile QR code + .conf file once."
+msgstr "Tạo sẵn cặp khóa cho bạn. Hiển thị mã QR quét trên điện thoại và tệp .conf một lần."
+
+#. js-lingui-explicit-id
+#: src/components/modals/CreatePeerModal.tsx:117
+msgid "Bring Your Own Public Key"
+msgstr "Tự cung cấp Public Key"
+
+#. js-lingui-explicit-id
+#: src/components/modals/CreatePeerModal.tsx:120
+msgid "Paste your public key. No QR code; provides a .conf file where you fill in PrivateKey."
+msgstr "Dán Public Key của bạn. Không tạo mã QR; tải về tệp .conf để tự điền PrivateKey."
+
+#. js-lingui-explicit-id
+#: src/components/modals/CreatePeerModal.tsx:131
+msgid "Your WireGuard Public Key (Base64, 44 chars)"
+msgstr "WireGuard Public Key của bạn (Base64, 44 ký tự)"
+
+#. js-lingui-explicit-id
+#: src/components/modals/CreatePeerModal.tsx:157
+msgid "Provisioning on RouterOS..."
+msgstr "Đang khởi tạo trên RouterOS..."
+
+#. js-lingui-explicit-id
+#: src/components/modals/CreatePeerModal.tsx:157
+msgid "Create Connection"
+msgstr "Tạo kết nối"
+
+#. js-lingui-explicit-id
+#: src/components/modals/NetworkFormModal.tsx:31
+msgid "Edit WireGuard Network"
+msgstr "Chỉnh sửa mạng WireGuard"
+
+#. js-lingui-explicit-id
+#: src/components/modals/NetworkFormModal.tsx:31
+msgid "Add WireGuard Network"
+msgstr "Thêm mạng WireGuard mới"
+
+#. js-lingui-explicit-id
+#: src/components/modals/NetworkFormModal.tsx:33
+msgid "Map a TikPortal network profile to an existing WireGuard interface on RouterOS."
+msgstr "Liên kết cấu hình mạng TikPortal với cổng WireGuard sẵn có trên RouterOS."
+
+#. js-lingui-explicit-id
+#: src/components/modals/NetworkFormModal.tsx:42
+msgid "Network Display Name"
+msgstr "Tên hiển thị mạng"
+
+#. js-lingui-explicit-id
+#: src/components/modals/NetworkFormModal.tsx:55
+msgid "RouterOS WireGuard Interface"
+msgstr "Tên cổng WireGuard trên RouterOS"
+
+#. js-lingui-explicit-id
+#: src/components/modals/NetworkFormModal.tsx:69
+msgid "Description"
+msgstr "Mô tả"
+
+#. js-lingui-explicit-id
+#: src/components/modals/NetworkFormModal.tsx:81
+msgid "RouterOS Interface Public Key"
+msgstr "Public Key của cổng RouterOS"
+
+#. js-lingui-explicit-id
+#: src/components/modals/NetworkFormModal.tsx:96
+msgid "Subnet CIDR"
+msgstr "Dải mạng (CIDR)"
+
+#. js-lingui-explicit-id
+#: src/components/modals/NetworkFormModal.tsx:108
+msgid "Router Gateway IP"
+msgstr "IP Gateway trên Router"
+
+#. js-lingui-explicit-id
+#: src/components/modals/NetworkFormModal.tsx:124
+msgid "Public Endpoint Host"
+msgstr "Tên miền / IP Endpoint công khai"
+
+#. js-lingui-explicit-id
+#: src/components/modals/NetworkFormModal.tsx:137
+msgid "Public UDP Port"
+msgstr "Cổng UDP công khai"
+
+#. js-lingui-explicit-id
+#: src/components/modals/NetworkFormModal.tsx:157
+msgid "Client DNS Servers"
+msgstr "Máy chủ DNS cho thiết bị"
+
+#. js-lingui-explicit-id
+#: src/components/modals/NetworkFormModal.tsx:168
+msgid "Client Allowed IPs"
+msgstr "Allowed IPs phía thiết bị"
+
+#. js-lingui-explicit-id
+#: src/components/modals/NetworkFormModal.tsx:179
+msgid "Keepalive (sec)"
+msgstr "Keepalive (giây)"
+
+#. js-lingui-explicit-id
+#: src/components/modals/NetworkFormModal.tsx:203
+msgid "Enable this network for user self-service"
+msgstr "Cho phép người dùng tự tạo kết nối trên mạng này"
+
+#. js-lingui-explicit-id
+#: src/components/modals/NetworkFormModal.tsx:218
+msgid "Save Network"
+msgstr "Lưu cấu hình mạng"
+
+#. js-lingui-explicit-id
+#: src/components/layout/Header.tsx:49
+msgid "RouterOS Mock Mode"
+msgstr "Chế độ giả lập RouterOS"
+
+#. js-lingui-explicit-id
+#: src/components/layout/Header.tsx:50
+msgid "RouterOS REST Connected"
+msgstr "Đã kết nối RouterOS REST"
+
+#. js-lingui-explicit-id
+#: src/components/layout/Header.tsx:74
+msgid "My VPNs"
+msgstr "VPN của tôi"
+
+#. js-lingui-explicit-id
+#: src/components/layout/Header.tsx:86
+msgid "Admin Console"
+msgstr "Quản trị"
+
+#. js-lingui-explicit-id
+#: src/components/layout/Header.tsx:103
+#: src/components/layout/Header.tsx:106
+msgid "Sign Out"
+msgstr "Đăng xuất"
+
+#. js-lingui-explicit-id
+#: src/components/admin/AdminDashboard.tsx:58
+msgid "WireGuard Networks ({count})"
+msgstr "Mạng WireGuard ({count})"
+
+#. js-lingui-explicit-id
+#: src/components/admin/AdminDashboard.tsx:70
+msgid "Users & Quotas ({count})"
+msgstr "Người dùng & Hạn mức ({count})"
+
+#. js-lingui-explicit-id
+#: src/components/admin/AdminDashboard.tsx:82
+msgid "All Provisioned Peers ({count})"
+msgstr "Tất cả kết nối ({count})"
+
+#. js-lingui-explicit-id
+#: src/components/admin/AdminDashboard.tsx:95
+msgid "Discovered RouterOS WireGuard Interfaces (via REST API)"
+msgstr "Các cổng WireGuard phát hiện trên RouterOS (qua REST API)"
+
+#. js-lingui-explicit-id
+#: src/components/admin/AdminDashboard.tsx:104
+msgid "Only RouterOS WireGuard interfaces matching your comment tag filter appear here."
+msgstr "Chỉ hiển thị các cổng WireGuard trên RouterOS có nhãn ghi chú (comment) khớp bộ lọc."
+
+#. js-lingui-explicit-id
+#: src/components/admin/AdminDashboard.tsx:115
+msgid "Add Network"
+msgstr "Thêm mạng"
+
+#. js-lingui-explicit-id
+#: src/components/admin/AdminDashboard.tsx:138
+msgid "Configured"
+msgstr "Đã cấu hình"
+
+#. js-lingui-explicit-id
+#: src/components/admin/AdminDashboard.tsx:146
+msgid "Import Interface"
+msgstr "Nhập cổng này"
+
+#. js-lingui-explicit-id
+#: src/components/admin/AdminDashboard.tsx:170
+msgid "ENABLED"
+msgstr "ĐANG BẬT"
+
+#. js-lingui-explicit-id
+#: src/components/admin/AdminDashboard.tsx:170
+msgid "DISABLED"
+msgstr "ĐÃ TẮT"
+
+#. js-lingui-explicit-id
+#: src/components/admin/AdminDashboard.tsx:186
+msgid "Gateway IP:"
+msgstr "IP Gateway:"
+
+#. js-lingui-explicit-id
+#: src/components/admin/AdminDashboard.tsx:196
+msgid "Allocated IPs:"
+msgstr "IP đã cấp:"
+
+#. js-lingui-explicit-id
+#: src/components/admin/AdminDashboard.tsx:209
+msgid "Edit Network"
+msgstr "Sửa mạng"
+
+#. js-lingui-explicit-id
+#: src/components/admin/AdminDashboard.tsx:233
+msgid "Global Default Max Peers per User"
+msgstr "Số kết nối tối đa mặc định mỗi người dùng"
+
+#. js-lingui-explicit-id
+#: src/components/admin/AdminDashboard.tsx:236
+msgid "Applies to all users unless overridden individually below (total across all networks)."
+msgstr "Áp dụng cho mọi người dùng trừ khi được đặt hạn mức riêng bên dưới (tổng trên mọi mạng)."
+
+#. js-lingui-explicit-id
+#: src/components/admin/AdminDashboard.tsx:254
+msgid "Save Default Limit"
+msgstr "Lưu hạn mức mặc định"
+
+#. js-lingui-explicit-id
+#: src/components/admin/AdminDashboard.tsx:263
+#: src/components/admin/AdminDashboard.tsx:321
+msgid "User"
+msgstr "Người dùng"
+
+#. js-lingui-explicit-id
+#: src/components/admin/AdminDashboard.tsx:264
+msgid "Role"
+msgstr "Vai trò"
+
+#. js-lingui-explicit-id
+#: src/components/admin/AdminDashboard.tsx:265
+msgid "Active Peers"
+msgstr "Kết nối đang có"
+
+#. js-lingui-explicit-id
+#: src/components/admin/AdminDashboard.tsx:266
+msgid "Custom Limit Override"
+msgstr "Hạn mức riêng"
+
+#. js-lingui-explicit-id
+#: src/components/admin/AdminDashboard.tsx:267
+msgid "Effective Limit"
+msgstr "Hạn mức áp dụng"
+
+#. js-lingui-explicit-id
+#: src/components/admin/AdminDashboard.tsx:320
+msgid "Device Name"
+msgstr "Tên thiết bị"
+
+#. js-lingui-explicit-id
+#: src/components/admin/AdminDashboard.tsx:322
+msgid "Network (ROS Interface)"
+msgstr "Mạng (Cổng ROS)"
+
+#. js-lingui-explicit-id
+#: src/components/admin/AdminDashboard.tsx:323
+msgid "Allocated IP"
+msgstr "IP được cấp"
+
+#. js-lingui-explicit-id
+#: src/components/admin/AdminDashboard.tsx:324
+msgid "Handshake / Traffic"
+msgstr "Handshake / Lưu lượng"
+
+#. js-lingui-explicit-id
+#: src/components/admin/AdminDashboard.tsx:325
+msgid "Actions"
+msgstr "Thao tác"
+
+#. js-lingui-explicit-id
+#: src/components/admin/AdminDashboard.tsx:348
+msgid "Revoke"
+msgstr "Thu hồi"
