@@ -13,11 +13,12 @@ It manages one or more WireGuard networks mapped to existing RouterOS WireGuard 
   - **Scope**: TikPortal **only adds, updates, or removes peers** on existing RouterOS WireGuard interfaces; it never modifies RouterOS routing tables, WAN interfaces, or firewall rules.
   - **Interface Filtering**: Controlled by `ROUTEROS_INTERFACE_TAG` (default `tikportal`, matched against RouterOS interface `comment`) and optional `ROUTEROS_ALLOWED_INTERFACES`.
   - **Mock Mode**: When `ROUTEROS_MOCK=true` (or `ROUTEROS_URL` is empty), `MockClient` simulates a RouterOS device with two WireGuard interfaces (`wg-main` and `wg-guest`).
-- **Authentication**: OIDC (Zitadel, Keycloak, etc.) with PKCE in `internal/auth/auth.go`, plus `DEV_AUTH_ENABLED=true` local dev login fallback.
+- **Authentication**: Stateless OIDC (Zitadel, Keycloak, etc.) via frontend SPA Authorization Code Flow with PKCE (`oidc-client-ts`), Bearer JWT / JWKS cached validation in Go backend (`internal/auth/oidc.go`), with `OIDC_INTERNAL_URL` and `verifyViaUserinfo` fallback, plus `DEV_AUTH_ENABLED=true` dev token fallback.
+- **Shielded SQLite Layer**: SQLite is used strictly for WireGuard networks (`wg_networks`), IP address allocation (IPAM), and peer metadata (`wg_peers`). The legacy stateful `users` table has been removed; peers associate directly with `user_sub` from token claims.
 
 ## Core Domain Rules
 1. **Global User Quota**:
-   - Peer limits apply **globally per user across all networks** (`default_max_peers_per_user` in `settings`, with optional per-user `max_peers_override` in `users`).
+   - Peer limits apply **globally per user across all networks** (`default_max_peers_per_user` in `settings`). Users are tracked by their OIDC `user_sub`.
 2. **IP Allocation & Reuse (IPAM)**:
    - `internal/ipam/ipam.go` allocates the lowest available host IP in the network's `subnet_cidr` (skipping network, `server_ip` gateway, and broadcast).
    - Deleting a peer removes it from RouterOS and `wg_peers`, immediately freeing its IP for reuse by subsequent connections.

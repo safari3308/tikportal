@@ -1,18 +1,34 @@
+export interface AppConfig {
+  oidc_issuer: string;
+  oidc_client_id: string;
+  oidc_client_secret?: string;
+  oidc_scopes?: string;
+  oidc_provider_name?: string;
+  oidc_enabled: boolean;
+  dev_auth_enabled: boolean;
+  routeros_mock: boolean;
+  routeros_url: string;
+}
+
 export interface User {
-  id: number;
+  id?: string | number;
   oidc_sub: string;
   email: string;
   display_name: string;
   role: 'admin' | 'user';
-  max_peers_override: number | null;
+  max_peers_override?: number | null;
   effective_max_peers: number;
   peer_count: number;
-  created_at: string;
+  created_at?: string;
 }
 
 export interface AuthState {
   authenticated: boolean;
   user: User | null;
+  quota?: {
+    used: number;
+    limit: number;
+  };
   oidc_enabled: boolean;
   dev_auth_enabled: boolean;
   routeros_mock: boolean;
@@ -40,7 +56,7 @@ export interface WGNetwork {
 
 export interface WGPeer {
   id: number;
-  user_id: number;
+  user_sub?: string;
   user_email?: string;
   user_name?: string;
   network_id: number;

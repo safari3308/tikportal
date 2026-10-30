@@ -24,17 +24,18 @@ func (s *Server) handleListNetworks(w http.ResponseWriter, r *http.Request) {
 
 func (s *Server) handleListMyPeers(w http.ResponseWriter, r *http.Request) {
 	user := currentUser(r)
-	peers, err := s.store.ListPeersByUser(r.Context(), user.ID)
+	peers, err := s.store.ListPeersByUser(r.Context(), user.Sub)
 	if err != nil {
 		writeError(w, http.StatusInternalServerError, err.Error())
 		return
 	}
 	s.vpn.EnrichPeersWithRouterOSStats(r.Context(), peers)
+	defaultMax, _ := s.store.GetDefaultMaxPeers(r.Context())
 	writeJSON(w, http.StatusOK, map[string]any{
 		"peers": peers,
 		"quota": map[string]int{
 			"used":  len(peers),
-			"limit": user.EffectiveMax,
+			"limit": defaultMax,
 		},
 	})
 }

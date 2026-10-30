@@ -79,7 +79,7 @@ func (s *Server) handleAdminDeleteNetwork(w http.ResponseWriter, r *http.Request
 }
 
 func (s *Server) handleAdminListUsers(w http.ResponseWriter, r *http.Request) {
-	users, err := s.store.ListUsers(r.Context())
+	users, err := s.store.ListActiveUsersFromPeers(r.Context(), s.cfg.AdminEmails)
 	if err != nil {
 		writeError(w, http.StatusInternalServerError, err.Error())
 		return
@@ -92,25 +92,8 @@ func (s *Server) handleAdminListUsers(w http.ResponseWriter, r *http.Request) {
 }
 
 func (s *Server) handleAdminUpdateUser(w http.ResponseWriter, r *http.Request) {
-	id, err := strconv.ParseInt(r.PathValue("id"), 10, 64)
-	if err != nil {
-		writeError(w, http.StatusBadRequest, "Invalid user ID")
-		return
-	}
-	var req struct {
-		Role             string `json:"role"`
-		MaxPeersOverride *int   `json:"max_peers_override"`
-	}
-	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
-		writeError(w, http.StatusBadRequest, "Invalid JSON payload")
-		return
-	}
-	updated, err := s.store.UpdateUserPolicy(r.Context(), id, req.Role, req.MaxPeersOverride)
-	if err != nil {
-		writeError(w, http.StatusBadRequest, err.Error())
-		return
-	}
-	writeJSON(w, http.StatusOK, map[string]any{"user": updated})
+	// With stateless auth, roles are managed via OIDC claims/ADMIN_EMAILS and limits via global settings.
+	writeJSON(w, http.StatusOK, map[string]any{"ok": true})
 }
 
 func (s *Server) handleAdminListAllPeers(w http.ResponseWriter, r *http.Request) {
@@ -133,7 +116,7 @@ func (s *Server) handleAdminGetSettings(w http.ResponseWriter, r *http.Request) 
 		"default_max_peers_per_user": defaultMax,
 		"routeros_mock":              s.ros.IsMock(),
 		"routeros_url":               s.cfg.RouterOSURL,
-		"oidc_enabled":               s.authMgr.OIDCEnabled(),
+		"oidc_enabled":               s.authValidator.OIDCEnabled(),
 		"oidc_issuer_url":            s.cfg.OIDCIssuerURL,
 	})
 }

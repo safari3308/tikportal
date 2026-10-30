@@ -12,34 +12,30 @@ import (
 	"github.com/canhnm/tikportal/internal/service"
 )
 
-type contextKey string
-
-const userContextKey contextKey = "tikportal_user"
-
 type Server struct {
-	cfg      *config.Config
-	store    *db.Store
-	ros      routeros.Client
-	vpn      *service.VPNService
-	authMgr  *auth.Manager
-	frontend fs.FS
+	cfg           *config.Config
+	store         *db.Store
+	ros           routeros.Client
+	vpn           *service.VPNService
+	authValidator *auth.Validator
+	frontend      fs.FS
 }
 
 func NewServer(
 	cfg *config.Config,
 	store *db.Store,
 	ros routeros.Client,
-	authMgr *auth.Manager,
+	authValidator *auth.Validator,
 	frontend fs.FS,
 ) *Server {
 	vpnSvc := service.NewVPNService(cfg, store, ros)
 	s := &Server{
-		cfg:      cfg,
-		store:    store,
-		ros:      ros,
-		vpn:      vpnSvc,
-		authMgr:  authMgr,
-		frontend: frontend,
+		cfg:           cfg,
+		store:         store,
+		ros:           ros,
+		vpn:           vpnSvc,
+		authValidator: authValidator,
+		frontend:      frontend,
 	}
 	if ros.IsMock() {
 		vpnSvc.SeedMockNetworks(context.Background())
@@ -50,14 +46,13 @@ func NewServer(
 func (s *Server) Handler() http.Handler {
 	mux := http.NewServeMux()
 
-	// Auth & Status endpoints
+	// Public config & status endpoints
+	mux.HandleFunc("GET /api/config", s.handlePublicConfig)
 	mux.HandleFunc("GET /api/auth/me", s.handleAuthMe)
-	mux.HandleFunc("GET /api/auth/login", s.handleOIDCLogin)
-	mux.HandleFunc("GET /api/auth/callback", s.handleOIDCCallback)
 	mux.HandleFunc("POST /api/auth/dev-login", s.handleDevLogin)
 	mux.HandleFunc("POST /api/auth/logout", s.handleLogout)
 
-	// User endpoints
+	// User endpoints (Bearer token required)
 	mux.Handle("GET /api/networks", s.requireAuth(http.HandlerFunc(s.handleListNetworks)))
 	mux.Handle("GET /api/peers", s.requireAuth(http.HandlerFunc(s.handleListMyPeers)))
 	mux.Handle("POST /api/peers", s.requireAuth(http.HandlerFunc(s.handleCreatePeer)))
@@ -65,7 +60,7 @@ func (s *Server) Handler() http.Handler {
 	mux.Handle("GET /api/peers/{id}/config", s.requireAuth(http.HandlerFunc(s.handleDownloadConfigTemplate)))
 	mux.Handle("DELETE /api/peers/{id}", s.requireAuth(http.HandlerFunc(s.handleDeletePeer)))
 
-	// Admin endpoints
+	// Admin endpoints (Bearer token + Admin role required)
 	mux.Handle("GET /api/admin/routeros/interfaces", s.requireAdmin(http.HandlerFunc(s.handleAdminROSInterfaces)))
 	mux.Handle("GET /api/admin/networks", s.requireAdmin(http.HandlerFunc(s.handleAdminListNetworks)))
 	mux.Handle("POST /api/admin/networks", s.requireAdmin(http.HandlerFunc(s.handleAdminCreateNetwork)))
@@ -84,25 +79,11 @@ func (s *Server) Handler() http.Handler {
 }
 
 func (s *Server) requireAuth(next http.Handler) http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		claims, err := s.authMgr.ParseSessionRequest(r)
-		if err != nil {
-			writeError(w, http.StatusUnauthorized, "Authentication required")
-			return
-		}
-		user, err := s.store.GetUserByID(r.Context(), claims.UserID)
-		if err != nil {
-			s.authMgr.ClearSessionCookie(w)
-			writeError(w, http.StatusUnauthorized, "User session no longer valid")
-			return
-		}
-		ctx := context.WithValue(r.Context(), userContextKey, user)
-		next.ServeHTTP(w, r.WithContext(ctx))
-	})
+	return s.authValidator.Middleware(next)
 }
 
 func (s *Server) requireAdmin(next http.Handler) http.Handler {
-	return s.requireAuth(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	return s.authValidator.Middleware(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		user := currentUser(r)
 		if user == nil || user.Role != "admin" {
 			writeError(w, http.StatusForbidden, "Admin privileges required")
@@ -112,7 +93,6 @@ func (s *Server) requireAdmin(next http.Handler) http.Handler {
 	}))
 }
 
-func currentUser(r *http.Request) *db.User {
-	u, _ := r.Context().Value(userContextKey).(*db.User)
-	return u
+func currentUser(r *http.Request) *auth.AuthenticatedUser {
+	return auth.UserFromContext(r.Context())
 }

@@ -169,7 +169,7 @@ export function useAdminConsole({
       const trimmed = overrideStr.trim();
       const parsed = trimmed === '' ? null : parseInt(trimmed, 10);
       try {
-        await api.adminUpdateUser(u.id, newRole, Number.isNaN(parsed as number) ? null : parsed);
+        await api.adminUpdateUser(u.oidc_sub || u.email, newRole, Number.isNaN(parsed as number) ? null : parsed);
         onNotice(`Updated quota/role for ${u.email}`);
         await Promise.all([onUserDashboardRefresh(), refreshAdminData()]);
       } catch (err: any) {

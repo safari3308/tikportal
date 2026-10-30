@@ -7,6 +7,7 @@ import (
 	"log"
 	"strings"
 
+	"github.com/canhnm/tikportal/internal/auth"
 	"github.com/canhnm/tikportal/internal/config"
 	"github.com/canhnm/tikportal/internal/db"
 	"github.com/canhnm/tikportal/internal/ipam"
@@ -77,7 +78,7 @@ func (s *VPNService) SeedMockNetworks(ctx context.Context) {
 
 func (s *VPNService) ProvisionPeer(
 	ctx context.Context,
-	user *db.User,
+	user *auth.AuthenticatedUser,
 	networkID int64,
 	rawPeerName string,
 	rawCustomPubKey string,
@@ -97,7 +98,9 @@ func (s *VPNService) ProvisionPeer(
 
 	peer, netCfg, err := s.store.CreatePeerWithIPAM(
 		ctx,
-		user.ID,
+		user.Sub,
+		user.Email,
+		user.DisplayName,
 		networkID,
 		peerName,
 		pubKey,
@@ -132,7 +135,7 @@ func (s *VPNService) ProvisionPeer(
 
 func (s *VPNService) RegeneratePeerKeys(
 	ctx context.Context,
-	actor *db.User,
+	actor *auth.AuthenticatedUser,
 	peerID int64,
 	rawCustomPubKey string,
 ) (*PeerProvisionResult, error) {
@@ -140,7 +143,7 @@ func (s *VPNService) RegeneratePeerKeys(
 	if err != nil {
 		return nil, err
 	}
-	if existing.UserID != actor.ID && actor.Role != "admin" {
+	if existing.UserSub != actor.Sub && actor.Role != "admin" {
 		return nil, fmt.Errorf("%w: You do not have permission to modify this peer", ErrForbidden)
 	}
 
@@ -190,14 +193,14 @@ func (s *VPNService) RegeneratePeerKeys(
 
 func (s *VPNService) GetPeerConfigTemplate(
 	ctx context.Context,
-	actor *db.User,
+	actor *auth.AuthenticatedUser,
 	peerID int64,
 ) (*db.WGPeer, string, error) {
 	peer, err := s.store.GetPeerByID(ctx, peerID)
 	if err != nil {
 		return nil, "", err
 	}
-	if peer.UserID != actor.ID && actor.Role != "admin" {
+	if peer.UserSub != actor.Sub && actor.Role != "admin" {
 		return nil, "", fmt.Errorf("%w: Forbidden", ErrForbidden)
 	}
 	netCfg, err := s.store.GetNetworkByID(ctx, peer.NetworkID)
@@ -207,12 +210,12 @@ func (s *VPNService) GetPeerConfigTemplate(
 	return peer, BuildPeerConfigText(peer, netCfg, ""), nil
 }
 
-func (s *VPNService) DeletePeer(ctx context.Context, actor *db.User, peerID int64) (string, error) {
+func (s *VPNService) DeletePeer(ctx context.Context, actor *auth.AuthenticatedUser, peerID int64) (string, error) {
 	peer, err := s.store.GetPeerByID(ctx, peerID)
 	if err != nil {
 		return "", err
 	}
-	if peer.UserID != actor.ID && actor.Role != "admin" {
+	if peer.UserSub != actor.Sub && actor.Role != "admin" {
 		return "", fmt.Errorf("%w: You do not have permission to delete this peer", ErrForbidden)
 	}
 	if err := s.ros.RemovePeer(ctx, peer.ROSPeerID); err != nil {

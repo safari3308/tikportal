@@ -269,7 +269,7 @@ export function AdminDashboard({
               </thead>
               <tbody className="divide-y divide-slate-800">
                 {adminUsers.map((u) => (
-                  <tr key={u.id}>
+                  <tr key={u.oidc_sub || u.email}>
                     <td className="px-4 py-3">
                       <div className="font-medium text-white">{u.display_name}</div>
                       <div className="text-slate-400">{u.email}</div>

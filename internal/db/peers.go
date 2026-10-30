@@ -11,7 +11,7 @@ import (
 
 type WGPeer struct {
 	ID           int64     `json:"id"`
-	UserID       int64     `json:"user_id"`
+	UserSub      string    `json:"user_sub"`
 	UserEmail    string    `json:"user_email,omitempty"`
 	UserName     string    `json:"user_name,omitempty"`
 	NetworkID    int64     `json:"network_id"`
@@ -39,7 +39,9 @@ type ProvisionCallback func(network *WGNetwork, allocatedIP string) (rosPeerID s
 // calls the RouterOS provision callback, and inserts the peer row.
 func (s *Store) CreatePeerWithIPAM(
 	ctx context.Context,
-	userID int64,
+	userSub string,
+	userEmail string,
+	userName string,
 	networkID int64,
 	peerName string,
 	publicKey string,
@@ -47,12 +49,9 @@ func (s *Store) CreatePeerWithIPAM(
 	keyMode string,
 	provisionFn ProvisionCallback,
 ) (*WGPeer, *WGNetwork, error) {
-	user, err := s.GetUserByID(ctx, userID)
+	defaultMax, err := s.GetDefaultMaxPeers(ctx)
 	if err != nil {
-		return nil, nil, err
-	}
-	if user.PeerCount >= user.EffectiveMax {
-		return nil, nil, ErrQuotaExceeded
+		defaultMax = 5
 	}
 
 	netCfg, err := s.GetNetworkByID(ctx, networkID)
@@ -69,12 +68,12 @@ func (s *Store) CreatePeerWithIPAM(
 	}
 	defer func() { _ = tx.Rollback() }()
 
-	// Re-verify quota inside transaction
+	// Verify quota inside transaction
 	var currentCount int
-	if err := tx.QueryRowContext(ctx, `SELECT COUNT(*) FROM wg_peers WHERE user_id = ?`, userID).Scan(&currentCount); err != nil {
+	if err := tx.QueryRowContext(ctx, `SELECT COUNT(*) FROM wg_peers WHERE user_sub = ?`, userSub).Scan(&currentCount); err != nil {
 		return nil, nil, err
 	}
-	if currentCount >= user.EffectiveMax {
+	if currentCount >= defaultMax {
 		return nil, nil, ErrQuotaExceeded
 	}
 
@@ -107,9 +106,9 @@ func (s *Store) CreatePeerWithIPAM(
 
 	res, err := tx.ExecContext(ctx, `
 		INSERT INTO wg_peers (
-			user_id, network_id, ros_peer_id, name, allocated_ip, public_key, preshared_key, key_mode
-		) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-	`, userID, networkID, rosPeerID, peerName, allocatedIP, publicKey, presharedKey, keyMode)
+			user_sub, user_email, user_name, network_id, ros_peer_id, name, allocated_ip, public_key, preshared_key, key_mode
+		) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+	`, userSub, userEmail, userName, networkID, rosPeerID, peerName, allocatedIP, publicKey, presharedKey, keyMode)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -129,15 +128,14 @@ func (s *Store) CreatePeerWithIPAM(
 func (s *Store) GetPeerByID(ctx context.Context, id int64) (*WGPeer, error) {
 	var p WGPeer
 	err := s.db.QueryRowContext(ctx, `
-		SELECT p.id, p.user_id, u.email, u.display_name,
+		SELECT p.id, p.user_sub, p.user_email, p.user_name,
 		       p.network_id, n.name, n.ros_interface,
 		       p.ros_peer_id, p.name, p.allocated_ip, p.public_key, p.preshared_key, p.key_mode, p.created_at
 		FROM wg_peers p
-		JOIN users u ON u.id = p.user_id
 		JOIN wg_networks n ON n.id = p.network_id
 		WHERE p.id = ?
 	`, id).Scan(
-		&p.ID, &p.UserID, &p.UserEmail, &p.UserName,
+		&p.ID, &p.UserSub, &p.UserEmail, &p.UserName,
 		&p.NetworkID, &p.NetworkName, &p.ROSInterface,
 		&p.ROSPeerID, &p.Name, &p.AllocatedIP, &p.PublicKey, &p.PresharedKey, &p.KeyMode, &p.CreatedAt,
 	)
@@ -150,21 +148,26 @@ func (s *Store) GetPeerByID(ctx context.Context, id int64) (*WGPeer, error) {
 	return &p, nil
 }
 
-func (s *Store) ListPeersByUser(ctx context.Context, userID int64) ([]WGPeer, error) {
-	return s.queryPeers(ctx, `WHERE p.user_id = ? ORDER BY p.id DESC`, userID)
+func (s *Store) ListPeersByUser(ctx context.Context, userSub string) ([]WGPeer, error) {
+	return s.queryPeers(ctx, `WHERE p.user_sub = ? ORDER BY p.id DESC`, userSub)
 }
 
 func (s *Store) ListAllPeers(ctx context.Context) ([]WGPeer, error) {
 	return s.queryPeers(ctx, `ORDER BY p.id DESC`)
 }
 
+func (s *Store) CountPeersByUser(ctx context.Context, userSub string) (int, error) {
+	var count int
+	err := s.db.QueryRowContext(ctx, `SELECT COUNT(*) FROM wg_peers WHERE user_sub = ?`, userSub).Scan(&count)
+	return count, err
+}
+
 func (s *Store) queryPeers(ctx context.Context, whereAndOrder string, args ...any) ([]WGPeer, error) {
 	query := `
-		SELECT p.id, p.user_id, u.email, u.display_name,
+		SELECT p.id, p.user_sub, p.user_email, p.user_name,
 		       p.network_id, n.name, n.ros_interface,
 		       p.ros_peer_id, p.name, p.allocated_ip, p.public_key, p.preshared_key, p.key_mode, p.created_at
 		FROM wg_peers p
-		JOIN users u ON u.id = p.user_id
 		JOIN wg_networks n ON n.id = p.network_id
 	` + " " + whereAndOrder
 
@@ -178,7 +181,7 @@ func (s *Store) queryPeers(ctx context.Context, whereAndOrder string, args ...an
 	for rows.Next() {
 		var p WGPeer
 		if err := rows.Scan(
-			&p.ID, &p.UserID, &p.UserEmail, &p.UserName,
+			&p.ID, &p.UserSub, &p.UserEmail, &p.UserName,
 			&p.NetworkID, &p.NetworkName, &p.ROSInterface,
 			&p.ROSPeerID, &p.Name, &p.AllocatedIP, &p.PublicKey, &p.PresharedKey, &p.KeyMode, &p.CreatedAt,
 		); err != nil {

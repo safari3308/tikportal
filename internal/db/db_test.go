@@ -14,14 +14,9 @@ func TestCreatePeerQuotaAndIPReuse(t *testing.T) {
 	}
 	defer store.Close()
 
-	user, err := store.UpsertUser(ctx, "sub-1", "alice@example.com", "Alice", false)
-	if err != nil {
-		t.Fatalf("UpsertUser failed: %v", err)
-	}
-	// First user should be auto-promoted to admin
-	if user.Role != "admin" {
-		t.Fatalf("expected first user to be admin, got %s", user.Role)
-	}
+	userSub := "sub-1"
+	userEmail := "alice@example.com"
+	userName := "Alice"
 
 	net1, err := store.CreateNetwork(ctx, &WGNetwork{
 		Name:                "Direct PPPoE",
@@ -46,16 +41,19 @@ func TestCreatePeerQuotaAndIPReuse(t *testing.T) {
 	}
 
 	// Peer 1 -> gets 10.10.0.2
-	p1, _, err := store.CreatePeerWithIPAM(ctx, user.ID, net1.ID, "Laptop", "pub1", "psk1", "server", mockProvision)
+	p1, _, err := store.CreatePeerWithIPAM(ctx, userSub, userEmail, userName, net1.ID, "Laptop", "pub1", "psk1", "server", mockProvision)
 	if err != nil {
 		t.Fatalf("CreatePeer 1 failed: %v", err)
 	}
 	if p1.AllocatedIP != "10.10.0.2" {
 		t.Fatalf("expected 10.10.0.2, got %s", p1.AllocatedIP)
 	}
+	if p1.UserSub != userSub || p1.UserEmail != userEmail {
+		t.Fatalf("expected userSub and userEmail preserved, got sub=%s email=%s", p1.UserSub, p1.UserEmail)
+	}
 
 	// Peer 2 -> gets 10.10.0.3
-	p2, _, err := store.CreatePeerWithIPAM(ctx, user.ID, net1.ID, "Phone", "pub2", "psk2", "server", mockProvision)
+	p2, _, err := store.CreatePeerWithIPAM(ctx, userSub, userEmail, userName, net1.ID, "Phone", "pub2", "psk2", "server", mockProvision)
 	if err != nil {
 		t.Fatalf("CreatePeer 2 failed: %v", err)
 	}
@@ -64,9 +62,18 @@ func TestCreatePeerQuotaAndIPReuse(t *testing.T) {
 	}
 
 	// Peer 3 -> should fail with ErrQuotaExceeded (global limit = 2)
-	_, _, err = store.CreatePeerWithIPAM(ctx, user.ID, net1.ID, "Tablet", "pub3", "psk3", "server", mockProvision)
+	_, _, err = store.CreatePeerWithIPAM(ctx, userSub, userEmail, userName, net1.ID, "Tablet", "pub3", "psk3", "server", mockProvision)
 	if !errors.Is(err, ErrQuotaExceeded) {
 		t.Fatalf("expected ErrQuotaExceeded, got %v", err)
+	}
+
+	// Verify active users aggregation
+	users, err := store.ListActiveUsersFromPeers(ctx, []string{"alice@example.com"})
+	if err != nil {
+		t.Fatalf("ListActiveUsersFromPeers failed: %v", err)
+	}
+	if len(users) != 1 || users[0].PeerCount != 2 || users[0].Role != "admin" {
+		t.Fatalf("unexpected users list: %+v", users)
 	}
 
 	// Delete Peer 1 (10.10.0.2) -> frees both quota and IP 10.10.0.2
@@ -75,7 +82,7 @@ func TestCreatePeerQuotaAndIPReuse(t *testing.T) {
 	}
 
 	// Create Peer 3 -> should now succeed and reuse 10.10.0.2!
-	p3, _, err := store.CreatePeerWithIPAM(ctx, user.ID, net1.ID, "Tablet", "pub3", "psk3", "custom", mockProvision)
+	p3, _, err := store.CreatePeerWithIPAM(ctx, userSub, userEmail, userName, net1.ID, "Tablet", "pub3", "psk3", "custom", mockProvision)
 	if err != nil {
 		t.Fatalf("CreatePeer 3 after delete failed: %v", err)
 	}

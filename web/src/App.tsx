@@ -47,7 +47,7 @@ export function App() {
 
   useEffect(() => {
     void (async () => {
-      const me = await authHook.fetchAuthMe();
+      const me = await authHook.initialize();
       if (me?.authenticated) {
         await userVpn.refreshUserDashboard();
         if (me.user?.role === 'admin') {
@@ -74,6 +74,7 @@ export function App() {
       <LoginView
         auth={authHook.auth}
         errorBanner={errorBanner}
+        onLoginOIDC={authHook.loginOIDC}
         devEmail={authHook.devEmail}
         onChangeDevEmail={authHook.setDevEmail}
         devName={authHook.devName}

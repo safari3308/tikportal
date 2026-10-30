@@ -1,4 +1,6 @@
+import { getAccessToken } from './auth/auth';
 import type {
+  AppConfig,
   AuthState,
   PeerProvisionResponse,
   ROSInterface,
@@ -8,12 +10,18 @@ import type {
 } from './types';
 
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
+  const token = await getAccessToken();
+  const headers = new Headers(init?.headers || {});
+  if (!headers.has('Content-Type') && (!init || init.method !== 'GET')) {
+    headers.set('Content-Type', 'application/json');
+  }
+  if (token) {
+    headers.set('Authorization', `Bearer ${token}`);
+  }
+
   const res = await fetch(path, {
-    headers: {
-      'Content-Type': 'application/json',
-      ...(init?.headers || {}),
-    },
     ...init,
+    headers,
   });
 
   const data = await res.json().catch(() => ({}));
@@ -24,10 +32,12 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
 }
 
 export const api = {
+  getConfig: () => request<AppConfig>('/api/config'),
+
   getAuthMe: () => request<AuthState>('/api/auth/me'),
 
   devLogin: (email: string, displayName: string) =>
-    request<{ user: User }>('/api/auth/dev-login', {
+    request<{ token: string; user: User }>('/api/auth/dev-login', {
       method: 'POST',
       body: JSON.stringify({ email, display_name: displayName }),
     }),
@@ -93,8 +103,8 @@ export const api = {
   adminListUsers: () =>
     request<{ users: User[]; default_max_peers_per_user: number }>('/api/admin/users'),
 
-  adminUpdateUser: (id: number, role: 'admin' | 'user', maxPeersOverride: number | null) =>
-    request<{ user: User }>(`/api/admin/users/${id}`, {
+  adminUpdateUser: (id: string | number, role: 'admin' | 'user', maxPeersOverride: number | null) =>
+    request<{ ok: boolean }>(`/api/admin/users/${id}`, {
       method: 'PUT',
       body: JSON.stringify({ role, max_peers_override: maxPeersOverride }),
     }),

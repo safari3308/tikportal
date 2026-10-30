@@ -9,6 +9,7 @@ import { GitHubIcon, LanguageSwitcher } from '../layout/LanguageSwitcher';
 interface LoginViewProps {
   auth: AuthState | null;
   errorBanner: string | null;
+  onLoginOIDC: () => void;
   devEmail: string;
   onChangeDevEmail: (v: string) => void;
   devName: string;
@@ -21,6 +22,7 @@ interface LoginViewProps {
 export function LoginView({
   auth,
   errorBanner,
+  onLoginOIDC,
   devEmail,
   onChangeDevEmail,
   devName,
@@ -60,13 +62,14 @@ export function LoginView({
 
         {auth?.oidc_enabled && (
           <div className="mt-6">
-            <a
-              href="/api/auth/login"
+            <button
+              type="button"
+              onClick={onLoginOIDC}
               className="flex w-full items-center justify-center gap-2 rounded-xl bg-cyan-500 px-4 py-2.5 text-sm font-semibold text-slate-950 transition hover:bg-cyan-400"
             >
               <Shield className="h-4 w-4" />
               {i18n._('Sign in with SSO (OIDC)')}
-            </a>
+            </button>
           </div>
         )}
 

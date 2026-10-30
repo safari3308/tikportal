@@ -1,24 +1,46 @@
 import { useCallback, useState } from 'react';
 import { api } from '../api';
-import type { AuthState } from '../types';
+import {
+  handleAuthCallback,
+  initAuth,
+  loginWithOIDC,
+  logout as authLogout,
+  setDevToken,
+} from '../auth/auth';
+import type { AppConfig, AuthState } from '../types';
 
 export function useAuth(onError: (msg: string | null) => void) {
+  const [config, setConfig] = useState<AppConfig | null>(null);
   const [auth, setAuth] = useState<AuthState | null>(null);
   const [loading, setLoading] = useState(true);
   const [devEmail, setDevEmail] = useState('admin@localhost');
   const [devName, setDevName] = useState('Network Admin');
 
-  const fetchAuthMe = useCallback(async (): Promise<AuthState | null> => {
+  const initialize = useCallback(async (): Promise<AuthState | null> => {
     setLoading(true);
     try {
+      const cfg = await api.getConfig();
+      setConfig(cfg);
+      await initAuth(cfg);
+      await handleAuthCallback();
+
       const me = await api.getAuthMe();
       setAuth(me);
       return me;
     } catch (err: any) {
-      onError(err.message || 'Failed to load application state');
+      onError(err.message || 'Failed to initialize authentication');
       return null;
     } finally {
       setLoading(false);
+    }
+  }, [onError]);
+
+  const loginOIDC = useCallback(async () => {
+    onError(null);
+    try {
+      await loginWithOIDC();
+    } catch (err: any) {
+      onError(err.message || 'OIDC redirect failed');
     }
   }, [onError]);
 
@@ -26,8 +48,10 @@ export function useAuth(onError: (msg: string | null) => void) {
     async (onSuccess: (me: AuthState) => Promise<void>) => {
       onError(null);
       try {
-        await api.devLogin(devEmail, devName);
-        const me = await fetchAuthMe();
+        const res = await api.devLogin(devEmail, devName);
+        setDevToken(res.token);
+        const me = await api.getAuthMe();
+        setAuth(me);
         if (me?.authenticated) {
           await onSuccess(me);
         }
@@ -35,22 +59,29 @@ export function useAuth(onError: (msg: string | null) => void) {
         onError(err.message);
       }
     },
-    [devEmail, devName, fetchAuthMe, onError]
+    [devEmail, devName, onError]
   );
 
   const logout = useCallback(async () => {
-    await api.logout();
+    try {
+      await api.logout();
+    } catch {
+      // Ignore API logout error
+    }
+    await authLogout();
     setAuth((prev) => (prev ? { ...prev, authenticated: false, user: null } : null));
   }, []);
 
   return {
+    config,
     auth,
     loading,
     devEmail,
     setDevEmail,
     devName,
     setDevName,
-    fetchAuthMe,
+    initialize,
+    loginOIDC,
     loginDev,
     logout,
   };

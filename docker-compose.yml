@@ -9,7 +9,6 @@ services:
       LISTEN_ADDR: ":8080"
       BASE_URL: "${BASE_URL:-http://localhost:8080}"
       DB_PATH: "${DB_PATH:-/app/data/tikportal.db}"
-      SESSION_SECRET: "${SESSION_SECRET:?SESSION_SECRET is required in .env}"
       DEFAULT_MAX_PEERS_PER_USER: "${DEFAULT_MAX_PEERS_PER_USER:-5}"
       ADMIN_EMAILS: "${ADMIN_EMAILS:-admin@localhost}"
 
@@ -22,12 +21,13 @@ services:
       ROUTEROS_INTERFACE_TAG: "${ROUTEROS_INTERFACE_TAG:-tikportal}"
       ROUTEROS_ALLOWED_INTERFACES: "${ROUTEROS_ALLOWED_INTERFACES:-}"
 
-      # OIDC Authentication (Zitadel, Keycloak, Authentik, etc.)
+      # Stateless OIDC Authentication (Zitadel, Keycloak, Authentik, etc.)
       OIDC_ISSUER_URL: "${OIDC_ISSUER_URL:-}"
+      OIDC_INTERNAL_URL: "${OIDC_INTERNAL_URL:-}"
       OIDC_CLIENT_ID: "${OIDC_CLIENT_ID:-}"
       OIDC_CLIENT_SECRET: "${OIDC_CLIENT_SECRET:-}"
-      OIDC_REDIRECT_URL: "${OIDC_REDIRECT_URL:-http://localhost:8080/api/auth/callback}"
       OIDC_SCOPES: "${OIDC_SCOPES:-openid,profile,email}"
+      OIDC_PROVIDER_NAME: "${OIDC_PROVIDER_NAME:-Single Sign-On}"
       DEV_AUTH_ENABLED: "${DEV_AUTH_ENABLED:-false}"
     volumes:
       - tikportal_data:/app/data

@@ -14,17 +14,18 @@ type Config struct {
 	BaseURL    string
 
 	// Session / Auth settings
-	SessionSecret        string
 	DefaultMaxPeersTotal int
 	AdminEmails          []string
 	DevAuthEnabled       bool
 
 	// OIDC configuration (Zitadel, Keycloak, etc.)
 	OIDCIssuerURL    string
+	OIDCInternalURL  string
 	OIDCClientID     string
 	OIDCClientSecret string
 	OIDCRedirectURL  string
 	OIDCScopes       []string
+	OIDCProviderName string
 
 	// RouterOS v7 REST API configuration
 	RouterOSURL                   string
@@ -47,7 +48,12 @@ func Load() *Config {
 
 	listenAddr := normalizeListenAddr(getEnv("LISTEN_ADDR", ":8080"))
 	baseURL := strings.TrimRight(getEnv("BASE_URL", "http://localhost:8080"), "/")
-	oidcIssuer := strings.TrimRight(getEnv("OIDC_ISSUER_URL", ""), "/")
+	oidcIssuer := strings.TrimRight(getEnv("OIDC_ISSUER_URL", getEnv("OIDC_ISSUER", getEnv("ZITADEL_ISSUER", ""))), "/")
+	oidcInternalURL := strings.TrimRight(getEnv("OIDC_INTERNAL_URL", ""), "/")
+	oidcClientID := getEnv("OIDC_CLIENT_ID", getEnv("ZITADEL_CLIENT_ID", ""))
+	oidcClientSecret := getEnv("OIDC_CLIENT_SECRET", getEnv("ZITADEL_CLIENT_SECRET", ""))
+	oidcScopes := splitCSV(getEnv("OIDC_SCOPES", "openid,profile,email"))
+	oidcProviderName := getEnv("OIDC_PROVIDER_NAME", "Zitadel SSO")
 
 	// Enable dev login fallback only when OIDC is not configured or DEV_AUTH_ENABLED=true
 	devAuthDefault := "false"
@@ -65,15 +71,16 @@ func Load() *Config {
 		ListenAddr:                    listenAddr,
 		DBPath:                        getEnv("DB_PATH", "./data/tikportal.db"),
 		BaseURL:                       baseURL,
-		SessionSecret:                 getEnv("SESSION_SECRET", "tikportal-change-me-in-production-secret-key"),
 		DefaultMaxPeersTotal:          defaultMaxPeers,
 		AdminEmails:                   splitCSV(getEnv("ADMIN_EMAILS", "admin@localhost")),
 		DevAuthEnabled:                parseBool(getEnv("DEV_AUTH_ENABLED", devAuthDefault)),
 		OIDCIssuerURL:                 oidcIssuer,
-		OIDCClientID:                  getEnv("OIDC_CLIENT_ID", ""),
-		OIDCClientSecret:              getEnv("OIDC_CLIENT_SECRET", ""),
-		OIDCRedirectURL:               getEnv("OIDC_REDIRECT_URL", baseURL+"/api/auth/callback"),
-		OIDCScopes:                    splitCSV(getEnv("OIDC_SCOPES", "openid,profile,email")),
+		OIDCInternalURL:               oidcInternalURL,
+		OIDCClientID:                  oidcClientID,
+		OIDCClientSecret:              oidcClientSecret,
+		OIDCRedirectURL:               getEnv("OIDC_REDIRECT_URL", baseURL+"/"),
+		OIDCScopes:                    oidcScopes,
+		OIDCProviderName:              oidcProviderName,
 		RouterOSURL:                   rosURL,
 		RouterOSUser:                  getEnv("ROUTEROS_USER", "admin"),
 		RouterOSPassword:              getEnv("ROUTEROS_PASSWORD", ""),

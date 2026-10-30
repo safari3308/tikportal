@@ -36,13 +36,19 @@ func main() {
 		)
 	}
 
-	authMgr := auth.NewManager(cfg)
+	authValidator := auth.NewValidator(
+		cfg.OIDCIssuerURL,
+		cfg.OIDCInternalURL,
+		cfg.OIDCClientID,
+		cfg.DevAuthEnabled,
+		cfg.AdminEmails,
+	)
 	feFS, err := tikportal.FrontendFS()
 	if err != nil {
 		log.Printf("warn: embedded frontend filesystem not available: %v", err)
 	}
 
-	srv := api.NewServer(cfg, store, rosClient, authMgr, feFS)
+	srv := api.NewServer(cfg, store, rosClient, authValidator, feFS)
 
 	httpServer := &http.Server{
 		Addr:              cfg.ListenAddr,
